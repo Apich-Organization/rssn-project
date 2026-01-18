@@ -20,13 +20,13 @@ authors:
 identifiers:
   - type: doi
     value: 10.6084/m9.figshare.31044715
-    description: First Published on Figshare
+    description: Member Project First Published on Figshare
   - type: url
     value: 'https://crates.io/crates/rssn'
-    description: First Published on crates.io (Rust Package Registry)
+    description: Member Project First Published on crates.io (Rust Package Registry)
   - type: url
     value: 'https://docs.rs/rssn'
-    description: First Published on docs.io (Rust Package Docs Index)
+    description: Member Project First Published on docs.io (Rust Package Docs Index)
 repository-code: 'https://github.com/Apich-Organization/rssn-project'
 url: 'https://apich-organization.github.io/rssn-project/'
 repository: 'https://codeberg.org/Apich-Organization/rssn'
@@ -63,6 +63,6 @@ keywords:
   - Symbolic Mathematics
   - Advanced Algebras
 license: Apache-2.0
-commit: 6da1b54e4383f8af0c1057d7bf76eb05787c33aa
+commit: 6f59cb8886c3302af47b5a989d31f7e3c7a6fc55
 version: v0.2.3 & v0.0.0
 date-released: '2026-01-18'
