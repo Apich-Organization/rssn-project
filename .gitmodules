@@ -4,3 +4,12 @@
 [submodule "rssn"]
 	path = rssn
 	url = https://github.com/Apich-Organization/rssn
+[submodule "rssn-advanced.wiki"]
+	path = rssn-advanced.wiki
+	url = https://github.com/Apich-Organization/rssn-advanced.wiki.git
+[submodule "rssn.wiki"]
+	path = rssn.wiki
+	url = https://github.com/Apich-Organization/rssn.wiki.git
+[submodule "rssn-project.wiki"]
+	path = rssn-project.wiki
+	url = https://github.com/Apich-Organization/rssn-project.wiki.git
