@@ -69,6 +69,8 @@ Please see the Security Section for each of the separate member project of the r
 
 Please see the Code Of Conduct for each of the separate member project of the rssn project for more details.
 
+And as for the project wide Code Of Conduct, please refer to [CODE_OF_CONDUCT](CODE_OF_CONDUCT.md) for more details.
+
 Report of abuse are fully avalible in this project.
 
 ---
@@ -76,3 +78,9 @@ Report of abuse are fully avalible in this project.
 ## Project Wiki
 
 Please see the GitHub wiki Page of this repository and the GitHub wiki Pages of the member repositories for more details.
+
+---
+
+## Code Stastics
+
+Please see [CODE_STASTICS](CODE_STASTICS.md) for more details.
