@@ -2,52 +2,59 @@
 
 export PROJECT_ROOT_DIR=$(pwd)
 export TIMESTAMP=$(date +%Y%m%d_%H%M%S)
-export FINAL_OUTPUT_DIR="$PROJECT_ROOT_DIR/analysis_$TIMESTAMP"
+export FINAL_OUTPUT_DIR="$PROJECT_ROOT_DIR/high_res_analysis_$TIMESTAMP"
 
 mkdir -p "$FINAL_OUTPUT_DIR"
 
-# --- Function for the Root Project ---
-echo "----------------------------------------------------"
-echo "ANALYZING ROOT PROJECT"
-# Use a static name "ROOT" for the main repo files
-git-of-theseus-analyze --outdir "$FINAL_OUTPUT_DIR/ROOT_raw" --interval 5400 "."
-cd "$FINAL_OUTPUT_DIR/ROOT_raw"
-[ -f cohorts.json ] && git-of-theseus-stack-plot cohorts.json --outfile "../ROOT_cohorts.png"
-[ -f authors.json ] && git-of-theseus-stack-plot authors.json --outfile "../ROOT_authors.png"
-[ -f exts.json ]    && git-of-theseus-stack-plot exts.json    --outfile "../ROOT_exts.png"
+# --- Function to handle plotting ---
+run_plots() {
+    local d=$1
+    local n=$2
+    cd "$d" || return
+
+    # 1. Growth (Total LOC)
+    [ -f cohorts.json ] && git-of-theseus-stack-plot cohorts.json --outfile "../${n}_growth.png"
+    # 2. Age Mix (%)
+    [ -f cohorts.json ] && git-of-theseus-stack-plot cohorts.json --normalize --outfile "../${n}_age_mix.png"
+    # 3. Authors
+    [ -f authors.json ] && git-of-theseus-stack-plot authors.json --outfile "../${n}_authors.png"
+    # 4. Survival Decay
+    [ -f survival.json ] && git-of-theseus-survival-plot survival.json --outfile "../${n}_survival.png"
+}
+
+# --- 1. Analyze ROOT ---
+echo "Analyzing ROOT with 5400s intervals..."
+git-of-theseus-analyze --outdir "$FINAL_OUTPUT_DIR/ROOT_data" --interval 5400 --all-filetypes "."
+run_plots "$FINAL_OUTPUT_DIR/ROOT_data" "ROOT"
 cd "$PROJECT_ROOT_DIR"
 
-# --- Analyze Submodules with Clean Names ---
+# --- 2. Analyze SUBMODULES ---
 git submodule update --init --recursive
 git submodule foreach --recursive '
-    # Get just the folder name (e.g., "rssn") instead of path
     CLEAN_NAME=$(basename "$displaypath")
 
-    # Calculate local timeline
+    # Calculate timestamps
     FIRST=$(git log --reverse --format=%ct | head -1)
     LAST=$(git log -1 --format=%ct)
     AGE=$((LAST - FIRST))
 
-    # Set interval: 1/100th of age or minimum 5400 seconds
-    INT=$((AGE / 100))
+    # Apply your logic: 1/120 of age, but minimum 5400s
+    INT=$((AGE / 120))
     if [ "$INT" -lt 5400 ]; then INT=5400; fi
 
-    echo "----------------------------------------------------"
-    echo "ANALYZING SUBMODULE: $CLEAN_NAME"
+    echo "Analyzing $CLEAN_NAME | Interval: ${INT}s"
 
     OUT_DIR="$FINAL_OUTPUT_DIR/${CLEAN_NAME}_data"
     mkdir -p "$OUT_DIR"
 
-    # Run analysis
     git-of-theseus-analyze --outdir "$OUT_DIR" --interval "$INT" --all-filetypes "."
 
-    # Generate Plots with Clean Filenames
+    # Run Plots
     cd "$OUT_DIR"
-    [ -f cohorts.json ] && git-of-theseus-stack-plot cohorts.json --outfile "../${CLEAN_NAME}_cohorts.png"
+    [ -f cohorts.json ] && git-of-theseus-stack-plot cohorts.json --outfile "../${CLEAN_NAME}_growth.png"
+    [ -f cohorts.json ] && git-of-theseus-stack-plot cohorts.json --normalize --outfile "../${CLEAN_NAME}_age_mix.png"
     [ -f authors.json ] && git-of-theseus-stack-plot authors.json --outfile "../${CLEAN_NAME}_authors.png"
-    [ -f exts.json ]    && git-of-theseus-stack-plot exts.json    --outfile "../${CLEAN_NAME}_exts.png"
+    [ -f survival.json ] && git-of-theseus-survival-plot survival.json --outfile "../${CLEAN_NAME}_survival.png"
 '
 
-echo "----------------------------------------------------"
-echo "SUCCESS: Check your results in: $FINAL_OUTPUT_DIR"
-ls -1 "$FINAL_OUTPUT_DIR"/*.png
+echo "Done! Check: $FINAL_OUTPUT_DIR"
