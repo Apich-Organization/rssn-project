@@ -1,0 +1,6 @@
+[submodule "rssn-advanced"]
+	path = rssn-advanced
+	url = https://github.com/Apich-Organization/rssn-advanced
+[submodule "rssn"]
+	path = rssn
+	url = https://github.com/Apich-Organization/rssn
