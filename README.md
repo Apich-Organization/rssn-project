@@ -45,6 +45,19 @@ Please see the Contributing section for each of the separate member project of t
 
 ---
 
+## Architecture
+
+The RSSN Project utilizes a **'1+N' architecture**, featuring **rssn** as the core foundation supported by numerous official and community-developed plugins and expansions.
+
+Current official ecosystem projects include:
+
+* **The Janus Project** (In Development, Symbolic Computing)
+* **rssn-advanced** (In Development, Physics Simulation)
+
+These peripheral projects are designed to seamlessly extend the capabilities of the core RSSN framework.
+
+---
+
 ## License
 
 All member projects of the rssn project are licensed under the **Apache 2.0** License.
