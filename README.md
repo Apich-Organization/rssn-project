@@ -51,8 +51,8 @@ The RSSN Project utilizes a **'1+N' architecture**, featuring **rssn** as the co
 
 Current official ecosystem projects include:
 
-* **The Janus Project** (In Development, Symbolic Computing)
-* **rssn-advanced** (In Development, Physics Simulation)
+* **The Janus Project** (In Development, Physics Simulation)
+* **rssn-advanced** (In Development, Symbolic Computing)
 
 These peripheral projects are designed to seamlessly extend the capabilities of the core RSSN framework.
 
@@ -97,3 +97,4 @@ Please see the GitHub wiki Page of this repository and the GitHub wiki Pages of 
 ## Code Stastics
 
 Please see [CODE_STASTICS](CODE_STASTICS.md) for more details.
+
