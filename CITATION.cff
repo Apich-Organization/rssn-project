@@ -63,6 +63,6 @@ keywords:
   - Symbolic Mathematics
   - Advanced Algebras
 license: Apache-2.0
-commit: 387741f7f84ed4db4c784e0d7622c53ec2a88c3f
-version: v0.2.5 & v0.0.0
-date-released: '2026-01-29'
+commit: 3eca69eaffc523367692299c1874cac00b4f7
+version: v0.2.6 & v0.0.2
+date-released: '2026-02-14'
